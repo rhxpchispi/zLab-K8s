@@ -17,6 +17,12 @@ patches:
         path: /spec/ports/0/nodePort
         value: 30002
 
+configMapGenerator:
+  - name: app-config
+    namespace: test-ns
+    files:
+      - configmap.properties
+
 images:
   - name: rhxpchispi/zlab-java-app
     newTag: test-latest
