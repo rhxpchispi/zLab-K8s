@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: zlab-java-app
+  name: zLab
   namespace: argocd
 spec:
   project: default
@@ -9,7 +9,7 @@ spec:
     namespace: default
     server: https://kubernetes.default.svc
   source:
-    repoURL: https://github.com/rhxpchispi/prueba-ambientes
+    repoURL: https://github.com/rhxpchispi/zLab-K8s
     targetRevision: HEAD
     path: overlays
   syncPolicy:
@@ -24,7 +24,7 @@ spec:
         path: overlays/dev
       destination:
         server: https://kubernetes.default.svc
-        namespace: dev
+        namespace: dev-ns
     - name: test
       source:
         repoURL: https://github.com/rhxpchispi/zLab-K8s
@@ -32,7 +32,7 @@ spec:
         path: overlays/test
       destination:
         server: https://kubernetes.default.svc
-        namespace: test
+        namespace: test-ns
     - name: prod
       source:
         repoURL: https://github.com/rhxpchispi/zLab-K8s
@@ -40,4 +40,4 @@ spec:
         path: overlays/prod
       destination:
         server: https://kubernetes.default.svc
-        namespace: prod
+        namespace: prod-ns
