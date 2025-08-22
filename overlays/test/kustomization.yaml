@@ -22,6 +22,8 @@ configMapGenerator:
     namespace: test-ns
     files:
       - configmap.properties
+    options:
+      disableNameSuffixHash: true
 
 images:
   - name: rhxpchispi/zlab-java-app
