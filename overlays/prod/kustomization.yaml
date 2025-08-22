@@ -1,0 +1,24 @@
+bases:
+  - ../../base
+  
+patches:
+  - target:
+      kind: Deployment
+      name: java-app
+    patch: |-
+        - op: replace
+          path: /spec/replicas
+          value: 3
+  - target:
+      kind: Service
+      name: java-app-service
+    patch: |
+      - op: replace
+        path: /spec/ports/0/nodePort
+        value: 30003
+
+images:
+  - name: rhxpchispi/zlab-java-app
+    newTag: prod-latest
+
+namespace: prod-ns

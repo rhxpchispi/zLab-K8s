@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: java-app-test
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/rhxpchispi/zLab-K8s
+    targetRevision: HEAD
+    path: overlays/test
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: test-ns
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

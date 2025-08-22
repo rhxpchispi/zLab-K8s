@@ -1,0 +1,43 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: zlab-java-app
+  namespace: argocd
+spec:
+  project: default
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: https://github.com/rhxpchispi/prueba-ambientes
+    targetRevision: HEAD
+    path: overlays
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+  applications:
+    - name: dev
+      source:
+        repoURL: https://github.com/rhxpchispi/zLab-K8s
+        targetRevision: HEAD
+        path: overlays/dev
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: dev
+    - name: test
+      source:
+        repoURL: https://github.com/rhxpchispi/zLab-K8s
+        targetRevision: HEAD
+        path: overlays/test
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: test
+    - name: prod
+      source:
+        repoURL: https://github.com/rhxpchispi/zLab-K8s
+        targetRevision: HEAD
+        path: overlays/prod
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: prod
