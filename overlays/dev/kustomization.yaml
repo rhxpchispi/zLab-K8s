@@ -21,7 +21,7 @@ configMapGenerator:
   - name: app-config
     namespace: dev-ns
     files:
-      - configmap.properties
+      - configmap.env
     options:
       disableNameSuffixHash: true
 
