@@ -19,7 +19,7 @@ patches:
 
 configMapGenerator:
   - name: app-config
-    namespace: dev-ns
+    namespace: test-ns
     literals:
       - APP_ENV=testing
       - WELCOME_MESSAGE=Bienvenido al Ambiente de Testing
