@@ -17,7 +17,7 @@ spec:
       prune: true
       selfHeal: true
   applications:
-    - name: dev
+    - name: zlab-dev
       source:
         repoURL: https://github.com/rhxpchispi/zLab-K8s
         targetRevision: HEAD
@@ -25,7 +25,7 @@ spec:
       destination:
         server: https://kubernetes.default.svc
         namespace: dev-ns
-    - name: test
+    - name: zlab-test
       source:
         repoURL: https://github.com/rhxpchispi/zLab-K8s
         targetRevision: HEAD
@@ -33,7 +33,7 @@ spec:
       destination:
         server: https://kubernetes.default.svc
         namespace: test-ns
-    - name: prod
+    - name: zlab-prod
       source:
         repoURL: https://github.com/rhxpchispi/zLab-K8s
         targetRevision: HEAD
