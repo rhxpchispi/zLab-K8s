@@ -1,23 +1,25 @@
+bases:
+  - ../../base
   
 patches:
-- patch: |-
-    - op: replace
-      path: /spec/replicas
-      value: 1
-  target:
-    kind: Deployment
-    name: java-app
-- patch: |
-    - op: replace
-      path: /spec/ports/0/nodePort
-      value: 30003
-  target:
-    kind: Service
-    name: java-app-service
+  - target:
+      kind: Deployment
+      name: java-app
+    patch: |-
+        - op: replace
+          path: /spec/replicas
+          value: 1
+  - target:
+      kind: Service
+      name: java-app-service
+    patch: |
+      - op: replace
+        path: /spec/ports/0/nodePort
+        value: 30003
 
 configMapGenerator:
   - name: app-config
-    namespace: dev-ns
+    namespace: prod-ns
     literals:
       - APP_ENV=production
       - WELCOME_MESSAGE=Bienvenido al Ambiente de Producción
@@ -28,11 +30,7 @@ configMapGenerator:
       disableNameSuffixHash: true
 
 images:
-- name: rhxpchispi/zlab-java-app
-  newName: rhxpchispi/zlab-java-app
-  newTag: prod-14
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-resources:
-- ../../base
+  - name: rhxpchispi/zlab-java-app
+    newTag: prod-latest
+
 namespace: prod-ns
